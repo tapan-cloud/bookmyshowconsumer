@@ -1,0 +1,9 @@
+bookmyshow:
+  wsdl: "http://bookmyshow-api980.us-e2.cloudhub.io/BookMyShowService/BookMyShowPort?wsdl"
+  service: "BookMyShowService"
+  port: "BookMyShowPort"
+  address: "http://bookmyshow-api980.us-e2.cloudhub.io/BookMyShowService/BookMyShowPort"
+
+http:
+  username: "testUser1"
+  password: "Welcome321"

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:wsc="http://www.mulesoft.org/schema/mule/wsc"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/wsc http://www.mulesoft.org/schema/mule/wsc/current/mule-wsc.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="b739b356-f8b0-4324-8693-e7d60dd31133" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<wsc:config name="Web_Service_Consumer_Config" doc:name="Web Service Consumer Config" doc:id="78df6396-280c-4e4a-8776-31ca28800551" >
+		<wsc:connection wsdlLocation="api\BookMyShow.wsdl" service="BookMyShowService" port="BookMyShowPort" address="${bookmyshow.address}">
+			<wsc:custom-transport-configuration >
+				<wsc:http-transport-configuration requesterConfig="HTTP_Request_configuration" />
+			</wsc:custom-transport-configuration>
+			<wsc:web-service-security mustUnderstand="false">
+				<wsc:username-token-security-strategy username="testUser1" password="Welcome321" addNonce="true" addCreated="true"/>
+			</wsc:web-service-security>
+		</wsc:connection>
+	</wsc:config>
+	<http:request-config name="HTTP_Request_configuration" doc:name="HTTP Request configuration" doc:id="855e3122-6071-445b-be20-bebfcbf1a3d6" >
+		<http:request-connection >
+			<http:authentication >
+				<http:basic-authentication username="${http.username}" password="${http.password}" />
+			</http:authentication>
+		</http:request-connection>
+	</http:request-config>
+	<configuration-properties doc:name="Configuration properties" doc:id="6d98591f-038a-4722-b880-cb8dba111127" file="dev.yaml" />
+	<flow name="bookmyshowconsumerFlow" doc:id="f8cc7382-3fcf-4766-aa4b-7001a628e268" >
+		<http:listener doc:name="Listener" doc:id="42df3847-bc3b-4f81-ab11-5747a9bbd74f" config-ref="HTTP_Listener_config" path="/bookConsume" outputMimeType="application/json" allowedMethods="POST"/>
+		<logger level="INFO" doc:name="Logger" doc:id="ace2b767-6af3-413e-be84-ed79f2514f90" message="#[vars.response]"/>
+		<logger level="INFO" doc:name="Logger" doc:id="a6daf980-7d06-4a2a-89fc-46aae3c2e269" message="#[payload]"/>
+	</flow>
+</mule>

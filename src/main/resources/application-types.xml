@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<types:mule xmlns:types="http://www.mulesoft.org/schema/mule/types">
+  <types:catalog>
+    <types:type name="input_json" format="json">
+      <types:shape format="weave" example="input.json"><![CDATA[%dw 2.0
+
+type input_json = {|
+  id: String, 
+  name: String, 
+  userName: String, 
+  age: String, 
+  language: String, 
+  genre: String, 
+  price: String, 
+  groupBooking: String, 
+  details: {|
+    noOfSeats: String, 
+    category: String
+  |}
+|} {"example": "{\\\"id\\\":\\\"Asvf1\\\",\\\"name\\\":\\\"Test\\\",\\\"userName\\\":\\\"asdfa\\\",\\\"age\\\":\\\"1\\\",\\\"language\\\":\\\"Tamil\\\",\\\"genre\\\":\\\"Fiction\\\",\\\"price\\\":\\\"20\\\",\\\"groupBooking\\\":\\\"false\\\",\\\"details\\\":{\\\"noOfSeats\\\":\\\"6\\\",\\\"category\\\":\\\"testk\\\"}}"}
+
+]]></types:shape>
+    </types:type>
+  </types:catalog>
+</types:mule>

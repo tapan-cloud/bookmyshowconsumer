@@ -1,0 +1,14 @@
+{
+   "id": "Asvf1",
+   "name": "Test",
+   "userName": "asdfa",
+   "age": "1",
+   "language": "Tamil",
+   "genre": "Fiction",
+   "price": "20",
+   "groupBooking": "false",
+   "details": {
+      "noOfSeats": "6",
+      "category": "testk"
+   }
+}
